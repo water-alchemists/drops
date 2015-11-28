@@ -1,4 +1,4 @@
-import { NAVIGATE_TO, NAVIGATE_BACK, START_UP } from '../actions/actionTypes';
+import { NAVIGATE_TO, NAVIGATE_BACK, APPSTATE_STARTUP } from '../actions/actionTypes';
 
 const initialState = {
 	stack: []
@@ -17,7 +17,7 @@ export default function(state = initialState, action = {}) {
 				...state,
 				stack: stack.slice(0, stack.length - 2)
 			};
-		case START_UP:
+		case APPSTATE_STARTUP:
 			if (action.state && action.state.navigation) {
 				return {
 					...state,

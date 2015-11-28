@@ -9,12 +9,17 @@ import { Provider } from 'react-redux/native';
 import thunk from 'redux-thunk';
 import middlewares from '../middlewares';
 import reducers from '../reducers';
+import subscribers from '../subscribers';
 
 import Navigation from './Navigation';
 
 const createStoreWithMiddleware = applyMiddleware(thunk, ...middlewares)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
+
+store.subscribe(() => {
+  subscribers.forEach(listener => listener(store));
+});
 
 class App extends Component {
   constructor(props, context) {

@@ -3,9 +3,14 @@
 import React, { Component, Navigator } from 'react-native';
 import { connect } from 'react-redux/native';
 
+//import first page
 import Settings from './Settings';
 
+//import actions
+import { appStartup } from '../actions/appstate';
+
 let {
+	AsyncStorage,
 	PropTypes
 } = React;
 
@@ -20,16 +25,17 @@ class Navigation extends Component {
 		state: PropTypes.object
 	}
 
-	constructor(props) {
-		super(props);
-		let {state, dispatch} = this.props;
-		this.dispatch = dispatch;
-		this.state = state;
+	componentDidMount(){
+		//This is for loading for previous application state
+		let { dispatch } = this.props;
+		AsyncStorage.getItem('state').then(stateString => {
+			let state = JSON.parse(stateString);
+			dispatch(appStartup(state));
+		});
 	}
 
 	renderScene(route, navigator){
-		let state = this.state,
-			dispatch = this.dispatch;
+		let { state, dispatch } = this.props;
 		if (route.component) return React.createElement(route.component, { navigator, state, dispatch });
 	}
 

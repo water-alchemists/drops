@@ -15,7 +15,7 @@ export default function(store) {
 function navigate (action) {
   let { navigator, destination } = action;
   if(!destination) return navigator.pop();
-    navigator.push({
+  navigator.push({
     name: destination,
     component: routes[destination]
   });
