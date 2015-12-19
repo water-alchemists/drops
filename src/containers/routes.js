@@ -3,5 +3,5 @@ import Dashboard from './Dashboard';
 
 export {
 	Settings,
-	Dashboard
+	Dashboard,
 };

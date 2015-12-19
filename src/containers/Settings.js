@@ -1,46 +1,48 @@
 'use strict';
-
-import React, { Component } from 'react-native';
-
-//Import Actions
-import { navigateTo } from '../actions/navigation';
+import React, { Component, Navigator } from 'react-native';
+import SideMenu from 'react-native-side-menu';
 
 //Import Components
+import Menu from '../components/Menu';
+import MenuNavItem from '../components/MenuNavItem';
 import Navbar from '../components/Navbar';
+import WifiDisplay from '../components/WifiDisplay';
 
 let {
-	View,
-	Text,
-	PropTypes
+	PropTypes,
 } = React;
 
 class Settings extends Component {
-	static propTypes = {
-		dispatch : PropTypes.func,
-		navigator: PropTypes.object,
-		state: PropTypes.object
-	}
-
-	constructor(props){
-		super(props);
-	}
-
-	goTo(destination){
-		let { dispatch, navigator } = this.props;
-		dispatch(navigateTo(destination, navigator));
-	}
-
 	render(){
-		let { dispatch, navigator } = this.props;
+		const { dispatch, navigator } = this.props,
+			destinations = ['Dashboard'],
+			menuItems = destinations.map(destination => {
+				return (
+					<MenuNavItem dispatch={dispatch}
+						display={destination}
+						navigator={navigator}
+						route={destination}
+					/>
+				);
+			}),
+			MenuComponent = <Menu options={menuItems} />;
 
 		return (
-			<View>
-				<Navbar dispatch={dispatch} navigator={navigator}/>
-				<Text>This is Settings.</Text>
-				<Text onPress={this.goTo.bind(this, 'Dashboard')}>Go to Dashboard</Text>
-			</View>
+			<SideMenu menu={MenuComponent}
+				menuPosition={'right'} 
+				touchToClose={true}
+			>
+				<Navbar dispatch={dispatch} navigator={navigator} />
+				<WifiDisplay dispatch={dispatch} />
+			</SideMenu>
 		);
 	}
 }
+
+Settings.propTypes = {
+	dispatch : PropTypes.func.isRequired,
+	navigator: PropTypes.instanceOf(Navigator).isRequired,
+	state: PropTypes.object.isRequired,
+};
 
 export default Settings;

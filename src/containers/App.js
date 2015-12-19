@@ -18,22 +18,21 @@ const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
 store.subscribe(() => {
-  subscribers.forEach(listener => listener(store));
+	subscribers.forEach(listener => listener(store));
 });
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
+	constructor(props, context) {
+		super(props, context);
+	}
 
-  render() {
-
-    return (
-      <Provider store={store}>
-        {() => <Navigation />}
-      </Provider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				{() => <Navigation />}
+			</Provider>
+		);
+	}
 }
 
 export default App;

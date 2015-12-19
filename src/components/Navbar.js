@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react-native';
+import React, { Component, Navigator } from 'react-native';
 
 //import actions
 import { navigateBack } from '../actions/navigation';
@@ -12,40 +12,53 @@ let {
 	Text,
 	View,
 	PropTypes,
-	StyleSheet
+	StyleSheet,
 } = React;
 
 class Navbar extends Component {
-	static propTypes = {
-		dispatch : PropTypes.func,
-		state: PropTypes.object,
-		navigator: PropTypes.object
+	goBack(){
+		const { dispatch, navigator } = this.props;
+		dispatch(navigateBack(navigator));
 	}
 
-	goBack(){
-		let { dispatch, navigator } = this.props;
-		dispatch(navigateBack(navigator));
+	toggleNav(){
+		const { menuActions } = this.context;
+		if(menuActions) return menuActions.toggle();
 	}
 
 	render(){
 		return (
 			<View style={styles.container}>
 				<Text style={styles.button} onPress={this.goBack.bind(this)}>Back</Text>
+				<Text style={styles.button} onPress={this.toggleNav.bind(this)}>Menu</Text>
 			</View>
 		);
 	}
 }
 
-export default Navbar;
+Navbar.propTypes = {
+	dispatch : PropTypes.func.isRequired,
+	navigator: PropTypes.instanceOf(Navigator).isRequired,
+};
+
+Navbar.contextTypes = {
+	menuActions: PropTypes.object,
+};
 
 let styles = StyleSheet.create({
 	container : {
 		backgroundColor : navbarBackground,
 		flexDirection : 'row',
-		paddingTop : 40
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingTop : 40,
 	},
 	button : {
 		textAlign : 'center',
-		padding: 5
-	}
-})
+		padding: 5,
+	},
+});
+
+
+
+export default Navbar;

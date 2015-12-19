@@ -1,6 +1,6 @@
 //actions related to navigation
-export const NAVIGATE_TO = 'GO_TO';
-export const NAVIGATE_BACK = 'GO_BACK';
+export const NAVIGATE_TO = 'NAVIGATE_TO';
+export const NAVIGATE_BACK = 'NAVIGATE_BACK';
 
 //actions related to application state
 export const APPSTATE_SHUTDOWN = 'APPSTATE_SHUTDOWN';

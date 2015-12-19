@@ -7,35 +7,30 @@ import { connect } from 'react-redux/native';
 import Settings from './Settings';
 
 //import actions
-import { appStartup } from '../actions/appstate';
+// import { appStartup } from '../actions/appstate';
 
 let {
-	AsyncStorage,
-	PropTypes
+	// AsyncStorage,
+	PropTypes,
 } = React;
 
 function mapStateToProps (state) {
-  return {state: state};
+	return {state};
 }
 
 class Navigation extends Component {
 
-	static propTypes = {
-		dispatch : PropTypes.func,
-		state: PropTypes.object
-	}
-
 	componentDidMount(){
 		//This is for loading for previous application state
-		let { dispatch } = this.props;
-		AsyncStorage.getItem('state').then(stateString => {
-			let state = JSON.parse(stateString);
-			dispatch(appStartup(state));
-		});
+		// let { dispatch } = this.props;
+		// AsyncStorage.getItem('state').then(stateString => {
+		// 	let state = JSON.parse(stateString);
+		// 	dispatch(appStartup(state));
+		// });
 	}
 
 	renderScene(route, navigator){
-		let { state, dispatch } = this.props;
+		const { state, dispatch } = this.props;
 		if (route.component) return React.createElement(route.component, { navigator, state, dispatch });
 	}
 
@@ -46,11 +41,17 @@ class Navigation extends Component {
 	render() {
 		return (
 			<Navigator
-				initialRoute={{name: 'Settings', component: Settings}}
 				configureScene={this.configureScene.bind(this)}
-				renderScene={this.renderScene.bind(this)} />
-			);
+				initialRoute={{name: 'Settings', component: Settings}}
+				renderScene={this.renderScene.bind(this)} 
+			/>
+		);
 	}
 }
+
+Navigation.propTypes = {
+	dispatch : PropTypes.func.isRequired,
+	state: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps)(Navigation);

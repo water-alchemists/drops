@@ -9,19 +9,19 @@ export default function(state = initialState, action = {}) {
 		case NAVIGATE_TO:
 			return {
 				...state,
-				stack: [...state.stack, action.destination]
+				stack: [...state.stack, action.destination],
 			};
 		case NAVIGATE_BACK:
 			let stack = state.stack;
 			return {
 				...state,
-				stack: stack.slice(0, stack.length - 2)
+				stack: stack.slice(0, stack.length - 2),
 			};
 		case APPSTATE_STARTUP:
 			if (action.state && action.state.navigation) {
 				return {
 					...state,
-					stack: [...action.state.navigation.stack]
+					stack: [...action.state.navigation.stack],
 				};
 			}
 			return state;
