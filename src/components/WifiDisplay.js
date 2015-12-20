@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component } from 'react-native';
+import React, { Component, NetInfo } from 'react-native';
 
 let {
 	Text,
@@ -9,9 +9,25 @@ let {
 } = React;
 
 class WifiDisplay extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			wifi : null,
+		};
+	}
+	componentWillMount(){
+		const self = this;
+		NetInfo.isConnected.fetch().then(wifi => {
+			self.setState({ wifi });
+		});
+	}
 	render(){
+		const {wifi} = this.state;
+
 		return(
 			<View>
+				<Text>Is the Wifi On?</Text>
+				<Text>{`${wifi}`}</Text>
 			</View>
 		);
 	}
