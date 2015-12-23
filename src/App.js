@@ -1,17 +1,14 @@
-/**
- * React Native Webpack Starter Kit
- * https://github.com/jhabdas/react-native-webpack-starter-kit
- */
+'use strict';
 import React, { Component } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux/native';
 
 import thunk from 'redux-thunk';
-import middlewares from '../middlewares';
-import reducers from '../reducers';
-import subscribers from '../subscribers';
+import middlewares from './middlewares';
+import reducers from './reducers';
+import subscribers from './subscribers';
 
-import Navigation from './Navigation';
+import Navigation from './containers/Navigation';
 
 const createStoreWithMiddleware = applyMiddleware(thunk, ...middlewares)(createStore);
 const reducer = combineReducers(reducers);

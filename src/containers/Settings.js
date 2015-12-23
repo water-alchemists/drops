@@ -26,7 +26,7 @@ class Settings extends Component {
 				);
 			}),
 			MenuComponent = <Menu options={menuItems} />;
-
+		
 		return (
 			<SideMenu menu={MenuComponent}
 				menuPosition={'right'} 

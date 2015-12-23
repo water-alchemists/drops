@@ -8,7 +8,7 @@ let {
 } = React;
 
 class Switch extends Component {
-	onValueChange(value){
+	valueChangeHandler(value){
 		const { onValueChange } = this.props;
 		onValueChange(value);
 	}
@@ -16,9 +16,9 @@ class Switch extends Component {
 	render(){
 		const os = Platform.OS,
 			{ disabled, value } = this.props,
-			SwitchIOSComponent = <SwitchIOS disabled={disabled} onValueChange={this.onValueChange.bind(this)} value={value}/>,
-			SwitchAndroidComponent = <SwitchAndroid disabled={disabled} value={value} onValueChange={this.onValueChange.bind(this)}/>;
-		console.log('this is the Platform', os);
+			SwitchIOSComponent = <SwitchIOS disabled={disabled} onValueChange={this.valueChangeHandler.bind(this)} value={value}/>,
+			SwitchAndroidComponent = <SwitchAndroid disabled={disabled} value={value} onValueChange={this.valueChangeHandler.bind(this)}/>;
+
 		return os === 'ios' ? SwitchIOSComponent : SwitchAndroidComponent;
 	}
 }

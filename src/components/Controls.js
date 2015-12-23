@@ -1,5 +1,6 @@
 'use strict';
 import React, { Component } from 'react-native';
+import Switch from './Switch';
 
 let {
 	Text,
@@ -10,10 +11,27 @@ let {
 } = React;
 
 class Controls extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			on: false,
+		};
+	}
+	onValueChange(on){
+		console.log('this is the value change', on);
+		this.setState({ on });
+	}
 	render(){
+		const { on } = this.state;
+
 		return(
 			<View>
-				<Text>Control LED</Text>
+				<View>
+					<Text>Control LED</Text>
+					<Switch onValueChange={this.onValueChange.bind(this)}
+						value={on}
+					/>
+				</View>
 				<Text>Read Analog</Text>
 			</View>
 		);

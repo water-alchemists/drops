@@ -1,6 +1,6 @@
 'use strict';
 import { Navigator } from 'react-native';
-import * as routes from '../containers/routes';
+import * as routes from '../routes';
 
 export default function() {
 	return function (next) {
