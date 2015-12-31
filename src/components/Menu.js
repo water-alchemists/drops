@@ -4,7 +4,7 @@ import Dimensions from 'Dimensions';
 
 const window = Dimensions.get('window');
 
-let {
+const {
 	ScrollView,
 	PropTypes,
 	StyleSheet,

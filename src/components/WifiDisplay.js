@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, NetInfo } from 'react-native';
 
-let {
+const {
 	Text,
 	View,
 	PropTypes,

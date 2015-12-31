@@ -1,6 +1,6 @@
 'use strict';
 import { AppRegistry } from 'react-native';
-import { App } from './src/App';
+import App from './src/App';
 
 class Root extends App {
 	static defaultProps = {
@@ -8,4 +8,4 @@ class Root extends App {
 	}
 }
 
-AppRegistry.registerComponent('Eddi', () => Eddi);
+AppRegistry.registerComponent('Eddi', () => Root);

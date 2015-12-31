@@ -1,44 +1,29 @@
 'use strict';
 import React, { Component, Navigator } from 'react-native';
-import SideMenu from 'react-native-side-menu';
 
 //Import Components
 import Menu from '../components/Menu';
-import MenuNavItem from '../components/MenuNavItem';
 import Navbar from '../components/Navbar';
 import Controls from '../components/Controls';
 
-let {
+const {
+	View,
 	PropTypes,
 } = React;
 
 class Dashboard extends Component {
 	render(){
-		const { dispatch, navigator, state } = this.props,
-			destinations = ['Settings'],
-			menuItems = destinations.map(destination => {
-				return (
-					<MenuNavItem dispatch={dispatch}
-						display={destination}
-						navigator={navigator}
-						route={destination}
-					/>
-				);
-			}),
-			MenuComponent = <Menu options={menuItems} />;
+		const { dispatch, navigator, state } = this.props;
 
 		return (
-			<SideMenu menu={MenuComponent}
-				menuPosition={'right'}
-				touchToClose={true}
-			>
+			<View>
 				<Navbar dispatch={dispatch} 
 					navigator={navigator}
 				/>
 				<Controls dispatch={dispatch} 
 					state={state}
 				/>
-			</SideMenu>
+			</View>
 		);
 	}
 }

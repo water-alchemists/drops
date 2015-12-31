@@ -6,10 +6,13 @@ import { connect } from 'react-redux/native';
 //import first page
 import Settings from './Settings';
 
+import routes from '../routes';
+
+console.log('this is the reoutes', routes);
 //import actions
 // import { appStartup } from '../actions/appstate';
 
-let {
+const {
 	// AsyncStorage,
 	PropTypes,
 } = React;
@@ -39,11 +42,12 @@ class Navigation extends Component {
 	}
 
 	render() {
+		const initialRoute = {name: 'Settings', component: routes['Settings']};
 		return (
 			<Navigator
-				configureScene={this.configureScene.bind(this)}
-				initialRoute={{name: 'Settings', component: Settings}}
-				renderScene={this.renderScene.bind(this)} 
+				configureScene={() => this.configureScene()}
+				initialRoute={initialRoute}
+				renderScene={(route, navigator) => this.renderScene(route, navigator)} 
 			/>
 		);
 	}

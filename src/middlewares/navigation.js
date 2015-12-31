@@ -3,12 +3,10 @@ import { Navigator } from 'react-native';
 import * as routes from '../routes';
 
 export default function() {
-	return function (next) {
-		return function (action) {
-			const navigator = action.navigator;
-			if (navigator && navigator instanceof Navigator) navigate(action);
-			next(action);
-		};
+	return next => action => {
+		const navigator = action.navigator;
+		if (navigator && navigator instanceof Navigator) navigate(action);
+		next(action);
 	};
 }
 

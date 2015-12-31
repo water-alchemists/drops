@@ -14,15 +14,10 @@ const createStoreWithMiddleware = applyMiddleware(thunk, ...middlewares)(createS
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
-store.subscribe(() => {
-	subscribers.forEach(listener => listener(store));
-});
+//Performs actions after reducers updated
+store.subscribe(() => subscribers.forEach(listener => listener(store)));
 
 class App extends Component {
-	constructor(props, context) {
-		super(props, context);
-	}
-
 	render() {
 		return (
 			<Provider store={store}>

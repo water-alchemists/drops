@@ -8,7 +8,7 @@ import { navigateBack } from '../actions/navigation';
 //import common styles
 import { navbarBackground } from '../styles';
 
-let {
+const {
 	Text,
 	View,
 	PropTypes,
@@ -22,8 +22,8 @@ class Navbar extends Component {
 	}
 
 	toggleNav(){
-		const { menuActions } = this.context;
-		if(menuActions) return menuActions.toggle();
+		// const { menuActions } = this.context;
+		// if(menuActions) return menuActions.toggle();
 	}
 
 	render(){
@@ -39,10 +39,6 @@ class Navbar extends Component {
 Navbar.propTypes = {
 	dispatch : PropTypes.func.isRequired,
 	navigator: PropTypes.instanceOf(Navigator).isRequired,
-};
-
-Navbar.contextTypes = {
-	menuActions: PropTypes.object,
 };
 
 let styles = StyleSheet.create({
